@@ -16,7 +16,7 @@ implementation and a version that uses a mutable hash table to memoize its
 recursive calls. Finally, I have provided two purely functional memoized
 implementations.
 
-cout_splits
+count_splits
 -----------
 
 This is a simple programming interview question. The input is a string of digits
