@@ -1,8 +1,11 @@
 package com.amjjd.functional_dynamic.fibonacci
 
 import org.scalatest.FunSuite
+import org.scalatest.concurrent.Timeouts
+import org.scalatest.time.SpanSugar._
+import com.amjjd.functional_dynamic.stop
 
-abstract class FibonacciSuite extends FunSuite {
+abstract class FibonacciSuite extends FunSuite with Timeouts {
   def fibonacci: Fibonacci
 
   test("0") {
@@ -17,16 +20,18 @@ abstract class FibonacciSuite extends FunSuite {
     assert(fibonacci(10) === 55L)
   }
 
-  /*test("50") {
-    assert(fibonacci(50) === 12586269025L)
-  }*/
+  ignore("50") {
+    failAfter(5 seconds) {
+      assert(fibonacci(50) === 12586269025L)
+    }(stop)
+  }
 }
 
 class SimpleFibonacciSuite extends FibonacciSuite {
   val fibonacci = SimpleFibonacci
 }
 
-/*class BottomUpFibonacciSuite extends FibonacciSuite {
+class BottomUpFibonacciSuite extends FibonacciSuite {
   val fibonacci = BottomUpFibonacci
 }
 
@@ -40,4 +45,4 @@ class PureFibonacciSuite extends FibonacciSuite {
 
 class StreamFibonacciSuite extends FibonacciSuite {
   val fibonacci = StreamFibonacci
-}*/
+}

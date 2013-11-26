@@ -1,8 +1,11 @@
 package com.amjjd.functional_dynamic.levenshtein_distance
 
 import org.scalatest.FunSuite
+import org.scalatest.concurrent.Timeouts
+import org.scalatest.time.SpanSugar._
+import com.amjjd.functional_dynamic.stop
 
-abstract class LevenshteinDistanceSuite extends FunSuite {
+abstract class LevenshteinDistanceSuite extends FunSuite with Timeouts {
   def distance: LevenshteinDistance
 
   test("kitten -> sitting") {
@@ -29,14 +32,16 @@ abstract class LevenshteinDistanceSuite extends FunSuite {
     assert(distance("", "") == 0)
   }
 
-  /*test("lorem ipsum") {
-    assert(distance(LoremIpsum, " " + LoremIpsum) === 1)
-  }*/
+  ignore("lorem ipsum") {
+    failAfter(5 seconds) {
+      assert(distance(LoremIpsum, " " + LoremIpsum) === 1)
+    }(stop)
+  }
 
   val LoremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut"
 }
 
-/*class SimpleLevenshteinDistanceSuite extends LevenshteinDistanceSuite {
+class SimpleLevenshteinDistanceSuite extends LevenshteinDistanceSuite {
   val distance = SimpleLevenshteinDistance
 }
 
@@ -50,4 +55,4 @@ class MemoizedLevenshteinDistanceSuite extends LevenshteinDistanceSuite {
 
 class PureLevenshteinDistanceSuite extends LevenshteinDistanceSuite {
   val distance = PureLevenshteinDistance
-}*/
+}
