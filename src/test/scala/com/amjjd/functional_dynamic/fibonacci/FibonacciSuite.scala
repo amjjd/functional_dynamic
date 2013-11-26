@@ -36,4 +36,8 @@ class MemoizedFibonacciSuite extends FibonacciSuite {
 
 class PureFibonacciSuite extends FibonacciSuite {
   val fibonacci = PureFibonacci
+}
+
+class StreamFibonacciSuite extends FibonacciSuite {
+  val fibonacci = StreamFibonacci
 }*/
