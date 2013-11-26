@@ -1,11 +1,8 @@
 package com.amjjd.functional_dynamic.fibonacci
 
 import org.scalatest.FunSuite
-import org.scalatest.concurrent.Timeouts
-import org.scalatest.time.SpanSugar._
-import com.amjjd.functional_dynamic.stop
 
-abstract class FibonacciSuite extends FunSuite with Timeouts {
+abstract class FibonacciSuite extends FunSuite {
   def fibonacci: Fibonacci
 
   test("0") {
@@ -21,9 +18,7 @@ abstract class FibonacciSuite extends FunSuite with Timeouts {
   }
 
   ignore("50") {
-    failAfter(5 seconds) {
-      assert(fibonacci(50) === 12586269025L)
-    }(stop)
+    assert(fibonacci(50) === 12586269025L)
   }
 }
 

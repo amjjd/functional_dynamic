@@ -1,11 +1,8 @@
 package com.amjjd.functional_dynamic.count_splits
 
 import org.scalatest.FunSuite
-import org.scalatest.concurrent.Timeouts
-import org.scalatest.time.SpanSugar._
-import com.amjjd.functional_dynamic.stop
 
-abstract class CountSplitsSuite extends FunSuite with Timeouts {
+abstract class CountSplitsSuite extends FunSuite {
   def splits: CountSplits
 
   test("12, 10296112") {
@@ -25,9 +22,7 @@ abstract class CountSplitsSuite extends FunSuite with Timeouts {
   }
 
   ignore("11, <45 1s>") {
-    failAfter(5 seconds) {
-      assert(splits("11")(List.fill(45)('1').mkString) === 1836311903L)
-    }(stop)
+    assert(splits("11")(List.fill(45)('1').mkString) === 1836311903L)
   }
 }
 
